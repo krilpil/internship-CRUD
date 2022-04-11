@@ -1,0 +1,93 @@
+:root {
+    --icon-size: 16px;
+    --color-main: #009879;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    font-size: 0.9em;
+    border-collapse: collapse;
+    letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    grid-area: table;
+}
+
+.table__head {
+    background-color: var(--color-main);
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table__body tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table__body tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table__body tr:last-of-type {
+    border-bottom: 2px solid var(--color-main);
+}
+
+.icon {
+    height: var(--icon-size);
+    width: var(--icon-size);
+    background-size: var(--icon-size);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.40;
+    transition: 0.2s;
+    border: none;
+    margin-right: 5px;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+.icon-edit {
+    composes: icon;
+    background-image: url("/assets/images/interface/edit.svg");
+}
+
+.icon-delete {
+    composes: icon;
+    background-image: url("/assets/images/interface/trash.svg");
+}
+
+.icon-done {
+    composes: icon;
+    background-image: url("/assets/images/interface/checkbox.svg");
+}
+
+.icon-remove {
+    composes: icon;
+    background-image: url("/assets/images/interface/delete.svg");
+}
+
+.table__input {
+    background: none;
+    border: none;
+    font-size: 0.85em;
+    margin: 0;
+    border-bottom: 2px solid var(--color-main);
+}
+
+.table__input:focus {
+    outline: none;
+}
+
+.table__not-found {
+    display: table-caption;
+    margin: 21px;
+}

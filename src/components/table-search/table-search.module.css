@@ -1,0 +1,12 @@
+.table-search {
+    grid-area: search;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.search-input {
+    height: 41px;
+    border-radius: 0;
+    border: 1px solid #dddddd;
+    padding: 0 15px;
+}

@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.table-page {
+    display: grid;
+    max-width: 768px;
+    min-height: 100vh;
+    align-content: center;
+    justify-items: center;
+    margin: 0 auto;
+}
+
+.table {
+    display: grid;
+    grid-template-areas: ". search search" "panel table table";
+}

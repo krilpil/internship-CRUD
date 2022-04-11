@@ -1,0 +1,27 @@
+.table-panel {
+    margin-top: 41px;
+    display: grid;
+    height: max-content;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    grid-area: panel;
+}
+
+.table-panel input[type='button'] {
+    font-weight: bold;
+    color: white;
+    background-color: #009879;
+    border: 1px solid #dddddd;
+    height: 44px;
+}
+
+.table-panel input[type='button']:hover {
+    cursor: pointer;
+    background-color: #00987990;
+}
+
+.table-panel__title {
+    margin: 0;
+    justify-self: center;
+    align-self: center;
+}
