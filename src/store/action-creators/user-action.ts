@@ -2,6 +2,7 @@ import {UserAction, UserActionTypes, Users} from "../../types/user";
 import {Dispatch} from "redux";
 import axios from "axios";
 import {TableRowProps} from "../../types/table";
+import {BASE_URL} from "../../constants/base-url";
 
 export const fetchUsers = () => {
     return async (dispatch: Dispatch<UserAction>) => {
@@ -9,7 +10,7 @@ export const fetchUsers = () => {
             dispatch({
                 type: UserActionTypes.FETCH_USERS,
             })
-            const response = await axios.get('http://178.128.196.163:3000/api/records')
+            const response = await axios.get(`${BASE_URL}/api/records`)
 
             dispatch({
                 type: UserActionTypes.FETCH_USERS_SUCCESS,
@@ -31,7 +32,7 @@ export const fetchUser = (id: string) => {
             dispatch({
                 type: UserActionTypes.FETCH_USERS,
             })
-            const response = await axios.get(`http://178.128.196.163:3000/api/records/${id}`)
+            const response = await axios.get(`${BASE_URL}/api/records/${id}`)
 
             dispatch({
                 type: UserActionTypes.FETCH_ONE_USER_SUCCESS,
@@ -58,7 +59,7 @@ export const setUser = (user: TableRowProps) => {
                 }
             })
             const response = await axios.put<Users>(
-                `http://178.128.196.163:3000/api/records/`,
+                `${BASE_URL}/api/records/`,
                 {
                     data: user
                 }
@@ -86,7 +87,7 @@ export const deleteUser = (id: string) => {
             })
 
             await axios.delete<Users>(
-                `http://178.128.196.163:3000/api/records/${id}`
+                `${BASE_URL}/api/records/${id}`
             )
 
             dispatch({
@@ -111,7 +112,7 @@ export const editUser = (user: TableRowProps) => {
             })
 
             const response = await axios.post<Users>(
-                `http://178.128.196.163:3000/api/records/${user.id}`,
+                `${BASE_URL}/api/records/${user.id}`,
                 {
                     data: {
                         name: user.name,
