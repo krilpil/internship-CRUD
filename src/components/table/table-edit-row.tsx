@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from "./table.module.css";
 import {TableRowProps} from "../../types/table";
 import changeValueRow from "../../helpers/changeValueRow";
 import {useActions} from "../../hooks/useActions";
+import changeFormValid from '../../helpers/changeValidForm';
 
 const TableEditRow: React.FC<TableRowProps> = ({name, age, email, id}) => {
     const {setActiveEditRowTable, editUser} = useActions()
@@ -11,6 +12,12 @@ const TableEditRow: React.FC<TableRowProps> = ({name, age, email, id}) => {
         age: age,
         email: email
     })
+
+    const [formValid, setFormValid] = useState(false)
+
+    useEffect(() => {
+        setFormValid(changeFormValid(editRow))
+    }, [editRow])
 
     const changeNewValueRow = (event: React.ChangeEvent<HTMLInputElement>, newRow: TableRowProps) => {
         setEditRow(changeValueRow(event, newRow))
@@ -30,22 +37,25 @@ const TableEditRow: React.FC<TableRowProps> = ({name, age, email, id}) => {
     return (
         <tr>
             <td>{id}</td>
-            <td>
-                <input name={'name'} value={editRow.name} className={style['table__input']}
-                       onChange={event => changeNewValueRow(event, editRow)} placeholder={'Введите имя...'}/>
+            <td className={editRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
+                <input name={'name'} value={editRow.name}
+                       onChange={event => changeNewValueRow(event, editRow)}
+                       placeholder={'Введите имя...'}/>
             </td>
-            <td>
-                <input name={'age'} value={editRow.age} className={style['table__input']}
-                       onChange={event => changeNewValueRow(event, editRow)} placeholder={'Введите возраст...'}/>
+            <td className={editRow.age.length === 0 ? style['table__input_error'] : style['table__input']}>
+                <input name={'age'} value={editRow.age}
+                       onChange={event => changeNewValueRow(event, editRow)}
+                       placeholder={'Введите возраст...'}/>
             </td>
-            <td>
-                <input name={'email'} value={editRow.email} className={style['table__input']}
-                       onChange={event => changeNewValueRow(event, editRow)} placeholder={'Введите email...'}/>
+            <td className={editRow.email.length === 0 ? style['table__input_error'] : style['table__input']}>
+                <input name={'email'} value={editRow.email}
+                       onChange={event => changeNewValueRow(event, editRow)}
+                       placeholder={'Введите email...'}/>
             </td>
             <td className={style['table__icon-block']}>
                 <input onClick={() => removeEditTableRow(id!)} type={'button'} title={'Отменить'}
                        className={style['icon-remove']}/>
-                <input onClick={() => doneEditTableRow(id!)} type={'button'} title={'Сохранить'}
+                <input disabled={!formValid} onClick={() => doneEditTableRow(id!)} type={'button'} title={'Сохранить'}
                        className={style['icon-done']}/>
             </td>
         </tr>

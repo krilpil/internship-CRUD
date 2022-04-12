@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from "./table.module.css";
 import {useActions} from "../../hooks/useActions";
 import {TableRowProps} from "../../types/table";
 import changeValueRow from "../../helpers/changeValueRow";
+import changeFormValid from '../../helpers/changeValidForm';
 
 const TableNewRow: React.FC = () => {
     const {setActiveNewRowTable, setUser} = useActions()
@@ -11,6 +12,12 @@ const TableNewRow: React.FC = () => {
         age: '',
         email: ''
     })
+
+    const [formValid, setFormValid] = useState(false)
+
+    useEffect(() => {
+        setFormValid(changeFormValid(newRow))
+    }, [newRow])
 
     const removeNewTableRow = () => {
         setActiveNewRowTable()
@@ -27,23 +34,21 @@ const TableNewRow: React.FC = () => {
     return (
         <tr>
             <td></td>
-            <td>
+            <td className={newRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
                 <input name={'name'} onChange={event => changeNewValueRow(event, newRow)}
-                       className={style['table__input']}
                        value={newRow.name} placeholder={'Введите имя...'}/>
             </td>
-            <td>
+            <td className={newRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
                 <input name={'age'} onChange={event => changeNewValueRow(event, newRow)}
-                       className={style['table__input']}
                        value={newRow.age} placeholder={'Введите возраст...'}/>
             </td>
-            <td><input name={'email'} onChange={event => changeNewValueRow(event, newRow)}
-                       className={style['table__input']}
+            <td className={newRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
+                <input name={'email'} onChange={event => changeNewValueRow(event, newRow)}
                        value={newRow.email} placeholder={'Введите email...'}/>
             </td>
             <td className={style['table__icon-block']}>
                 <input onClick={removeNewTableRow} type={'button'} title={'Отменить'} className={style['icon-remove']}/>
-                <input onClick={doneNewTableRow} type={'button'} title={'Сохранить'} className={style['icon-done']}/>
+                <input disabled={!formValid} onClick={doneNewTableRow} type={'button'} title={'Сохранить'} className={style['icon-done']}/>
             </td>
         </tr>
     );

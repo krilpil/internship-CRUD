@@ -75,7 +75,8 @@
     background-image: url("/assets/images/interface/delete.svg");
 }
 
-.table__input {
+.table__input input {
+    outline: none;
     background: none;
     border: none;
     font-size: 0.85em;
@@ -83,8 +84,26 @@
     border-bottom: 2px solid var(--color-main);
 }
 
-.table__input:focus {
+.table__input_error input {
     outline: none;
+    background: none;
+    border: none;
+    font-size: 0.85em;
+    margin: 0;
+    border-bottom: 2px solid red;
+}
+
+.table__input_error::after {
+    content: "Поле пустое!";
+    position: absolute;
+    transform:translate(-140%, 2%);
+    margin-top: 25px;
+    padding: 8px 12px;
+    background-color: #DC143C;
+    border-radius: 30% / 100%;
+    color: white;
+    font-size: 0.7em;
+    letter-spacing: 0;
 }
 
 .table__not-found {
