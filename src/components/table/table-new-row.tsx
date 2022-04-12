@@ -38,11 +38,11 @@ const TableNewRow: React.FC = () => {
                 <input name={'name'} onChange={event => changeNewValueRow(event, newRow)}
                        value={newRow.name} placeholder={'Введите имя...'}/>
             </td>
-            <td className={newRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
+            <td className={newRow.age.length === 0 ? style['table__input_error'] : style['table__input']}>
                 <input name={'age'} onChange={event => changeNewValueRow(event, newRow)}
                        value={newRow.age} placeholder={'Введите возраст...'}/>
             </td>
-            <td className={newRow.name.length === 0 ? style['table__input_error'] : style['table__input']}>
+            <td className={newRow.email.length === 0 ? style['table__input_error'] : style['table__input']}>
                 <input name={'email'} onChange={event => changeNewValueRow(event, newRow)}
                        value={newRow.email} placeholder={'Введите email...'}/>
             </td>
